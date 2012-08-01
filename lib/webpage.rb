@@ -37,6 +37,9 @@ class Webpage
     def nodes_with(key)
         @nokogiri.xpath("//@#{key}")
     end
+    def xpath(xstring)
+        @nokogiri.xpath(xstring)
+    end
 
     def keywords
         @keywords ||= @nokogiri.xpath("//meta[@name='keywords']").map{|meta|meta['content']}.flatten.join.split(',')
