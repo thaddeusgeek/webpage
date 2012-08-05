@@ -1,12 +1,12 @@
 #coding:UTF-8
 require 'webpage/common'
 class Webpage
+    attr_reader :nokogiri
     def initialize(body,options={})
         raise ArgumentError 'body cannot be empty' unless body
-        @body = body
         @options = options
         #@body = @body.force_encoding(@options[:encoding]).encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "") if @options.has_key?:encoding
-        @nokogiri = Nokogiri::HTML(@body)
+        @nokogiri = Nokogiri::HTML(body)
         if options.has_key?:uri
             @uri = fuzzy_uri(@options[:uri])
             raise '@uri should be absolute' unless @uri.absolute?
@@ -36,9 +36,6 @@ class Webpage
 
     def nodes_with(key)
         @nokogiri.xpath("//@#{key}")
-    end
-    def xpath(xstring)
-        @nokogiri.xpath(xstring)
     end
 
     def keywords

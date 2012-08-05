@@ -28,6 +28,9 @@ describe Webpage do
     it "links should be an array" do
         page.links.class.should == Array
     end
+    it "['h1'].to_a should return Array" do
+        page['h1'].to_a.class.should == Array
+    end
 
     it "[] should return class Nokogiri::XML::NodeSet" do
         %w(canonical keywords description).each do |tag|
@@ -37,6 +40,9 @@ describe Webpage do
 
     it "nodes_with should return an array with elements Nokogiri::XML::NodeSet" do
         page.nodes_with('id').class.should == Nokogiri::XML::NodeSet
+    end
+    it "nokogiri.xpath should return an array with elements Nokogiri::XML::NodeSet" do
+        page.nokogiri.xpath('//id').class.should == Nokogiri::XML::NodeSet
     end
     it "links' elements should be Webpage::Link" do
         page.links.each do |link|

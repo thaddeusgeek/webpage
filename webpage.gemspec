@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 s.name 			= %q{webpage}
-s.version 		= '0.0.6'
+s.version 		= '0.0.9'
 s.authors 		= ["seoaqua"]
 s.date 			= %q{2012-07-29}
 s.description 	= %q{a tool to extract some basic data from a webpage}
