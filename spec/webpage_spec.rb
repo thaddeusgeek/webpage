@@ -1,8 +1,10 @@
+# encoding: utf-8
+
 #coding:UTF-8
 require 'webpage'
 sample = File.read(File.join(File.dirname(__FILE__),'sample'))
 sample_uri = 'http://www.hudong.com/wiki/甜菜根'
-sample_to_uri = 'http://123.hudong.com/'
+sample_to_uri = 'http://www.hudong.com/'
 sample_not_to_uri = 'http://1234.hudong.com/'
 sample_to_host = 'hudong.com'
 sample_title = '甜菜根_互动百科'
@@ -28,8 +30,8 @@ describe Webpage do
     it "links should be an array" do
         page.links.class.should == Array
     end
-    it "['h1'].to_a should return Array" do
-        page['h1'].to_a.class.should == Array
+    it "h1 should return String" do
+        page.h1.class.should == String
     end
 
     it "[] should return class Nokogiri::XML::NodeSet" do
@@ -53,7 +55,7 @@ describe Webpage do
     it "description should be text" do
         page.description.class.should == String
     end
-    
+
     it "keywords should be array" do
         page.keywords.class.should == Array
     end
@@ -63,7 +65,7 @@ describe Webpage do
             keyword.class.should == String
         end
     end
-    
+
     it "link_to? should return bool" do
         [TrueClass,FalseClass].should include page.link_to?(sample_to_uri).class
     end
@@ -98,7 +100,7 @@ describe "the instance webpage of #{sample_uri}" do
         page.nodes_with('id').size.should == 92
     end
     it "should has <h1>#{sample_h1}"do
-        page['h1'].text.should == sample_h1
+        page.h1.should == sample_h1
     end
     it "should has canonical to #{sample_uri}" do
         page.canonical.should == sample_uri
@@ -111,7 +113,7 @@ describe "the instance webpage of #{sample_uri}" do
     it "should not link_to #{sample_not_to_uri}" do
         page.link_to?(sample_not_to_uri).should be_false
     end
-    
+
     it "should has link to " do
         page.links_to_different_host.any?{|link|link['href']}
     end

@@ -14,6 +14,9 @@ class Webpage
         end
         @domain = options[:domain]
     end
+    def h1
+        @nokogiri.xpath("//h1").text
+    end
     def title
         @nokogiri.xpath("//title").text
     end
