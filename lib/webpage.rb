@@ -84,6 +84,9 @@ class Webpage
             uri.host and uri.host.end_with?@domain
         end
     end
+    def comments
+        @nokogiri.xpath("//comment()").map{|comment|comment.to_s}.delete_if{|comment|comment.downcase.start_with?'[if ie' or comment.downcase.include?'google' or comment.downcase.include?'baidu'}
+    end
 
     private
     def make_href_absolute(href)
